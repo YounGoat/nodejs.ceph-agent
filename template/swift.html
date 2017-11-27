@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ceph Agent</title>
+</head>
+<body>
+    <h1>Ceph Object Storage Explorer</h1>
+
+    <ul>
+        <li>EndPoint  : ${meta:@endPoint}</li>
+        <li>Username  : ${meta:@username}</li>
+        <li>Container : ${meta:@container}</li>
+    </ul>
+
+    <hr/>
+    Location: ${location}
+
+    <ul>
+        ${item: <ol><a href="@href">@text</a></ol>}
+    </ul>
+
+</body>
+</html>
