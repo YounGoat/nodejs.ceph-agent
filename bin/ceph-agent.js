@@ -12,9 +12,22 @@ const MODULE_REQUIRE = 1
     , swift = require('ceph/swift')
     
     /* in-package */
-    , goaty = require('./lib/goaty')
-    , Sandy = require('./lib/sandy')
+    , goaty = require('../lib/goaty')
+    , Sandy = require('../lib/sandy')
     ;
+
+if (process.argv[2] && ['-h', '--help', '/?', 'help'].includes(process.argv[2].toLowerCase())) {
+    console.log();
+    console.log('NAME');
+    console.log('    ceph-agent - Simple HTTP proxy for Ceph storage.');
+    console.log();
+    console.log('SYNOPSIS');
+    console.log('    ceph-agent [connection-config.json]');
+    console.log('    Start an HTTP server proxying to the ceph storage described in the config file.')
+    console.log('    If argument absent, "ceph.json" in current working directory will be used.');
+    console.log();
+    process.exit();
+}
 
 let configPath = process.argv[2];
 if (!configPath) {
@@ -42,7 +55,7 @@ try {
     process.exit(1);
 }
 
-let tempalte = fs.readFileSync(path.join(__dirname, 'template', 'swift.html'), 'utf8');
+let tempalte = fs.readFileSync(path.resolve(__dirname, '..', 'template', 'swift.html'), 'utf8');
 let parser = goaty(tempalte);
 
 let meta = {

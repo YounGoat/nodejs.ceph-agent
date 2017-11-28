@@ -1,6 +1,10 @@
 #	ceph-agent
 __Simple UI for CEPH storage__
 
+[![total downloads of ceph-agent](https://img.shields.io/npm/dt/ceph-agent.svg)](https://www.npmjs.com/package/ceph-agent)
+[![ceph-agent's License](https://img.shields.io/npm/l/ceph-agent.svg)](https://www.npmjs.com/package/ceph-agent)
+[![latest version of ceph-agent](https://img.shields.io/npm/v/ceph-agent.svg)](https://www.npmjs.com/package/ceph-agent)
+
 Languages / [简体中文](./README.zh_CN.md)
 
 ##	Table of contents
