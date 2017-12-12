@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ceph/Swift Agent</title>
+</head>
+<body>
+    <h1>Ceph Object Storage Explorer</h1>
+    <h2>version ${meta:@version}</h2>
+
+    <ul>
+        <li>EndPoint  : ${meta:@endPoint}</li>
+        <li>Username  : ${meta:@username}</li>
+        <li>Container : ${meta:@container}</li>
+    </ul>
+
+    <hr/>
+    Location ${dirs: &gt; <a href="@href">@text</a>}
+
+    <ul>
+        ${item: <li><a href="@href" target="_blank">@text</a></li>}
+    </ul>
+
+</body>
+</html>

@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ceph Agent</title>
+    <title>Ceph/S3 Agent</title>
 </head>
 <body>
     <h1>Ceph Object Storage Explorer</h1>
+    <h2>version ${meta:@version}</h2>
 
     <ul>
         <li>EndPoint  : ${meta:@endPoint}</li>
-        <li>Username  : ${meta:@username}</li>
-        <li>Container : ${meta:@container}</li>
+        <li>Bucket    : ${meta:@bucket}</li>
     </ul>
 
     <hr/>
-    Location: ${location}
+    Location ${dirs: &gt; <a href="@href">@text</a>}
 
     <ul>
-        ${item: <ol><a href="@href">@text</a></ol>}
+        ${item: <li><a href="@href" target="_blank">@text</a></li>}
     </ul>
 
 </body>

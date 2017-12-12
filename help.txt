@@ -1,0 +1,9 @@
+
+NAME
+    ceph-agent - Simple HTTP proxy for Ceph storage.
+
+SYNOPSIS
+    ceph-agent [ -p | --port <port> ] [ -C | --connection <connection-config.json> ]
+    Start an HTTP server proxying to the ceph storage described in the 
+    config file. If argument absent, "ceph.json" or "swift.json" in current
+    working directory will be used.

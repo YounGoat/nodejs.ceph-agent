@@ -3,7 +3,10 @@
         "ceph-agent": "bin/ceph-agent.js"
     },
     "dependencies": {
-        "ceph": "~0.0.5"
+        "ceph": "^0.1.1",
+        "minimist": "^1.2.0",
+        "noda": "^0.1.2",
+        "portman": "^0.0.3"
     },
     "devDependencies": {
         "mocha": "^3.3.0"
@@ -11,7 +14,7 @@
     "directories": {},
     "scripts": {},
     "name": "ceph-agent",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": "index.js",
     "keywords": [
         "ceph",
