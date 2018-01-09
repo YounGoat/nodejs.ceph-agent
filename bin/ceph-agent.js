@@ -9,7 +9,7 @@ const MODULE_REQUIRE = 1
     , path = require('path')
     
     /* NPM */
-    , minimist = require('minimist')
+    , commandos = require('commandos')
     , noda = require('noda')
     , ceph = require('ceph')
     , portman = require('portman')
@@ -17,16 +17,28 @@ const MODULE_REQUIRE = 1
     /* in-package */
     , goaty = noda.inRequire('lib/goaty')
     , Sandy = noda.inRequire('lib/sandy')
+
+    /* in-file */
+    , help = () => console.log(noda.inRead('help.txt', 'utf8'))
     ;
 
-if (process.argv[2] && ['-h', '--help', '/?', 'help'].includes(process.argv[2].toLowerCase())) {
-    console.log(noda.inRead('help.txt', 'utf8'));
+const cmd = commandos.parse({
+    groups: [[ 
+            '--help -h [0:=* help]',
+        ], [
+            '--port -p [*:~ ^\\d+$]',
+            '--connection -C [*]',
+            '--container --bucket',
+        ], ],    
+    catcher: help
+});
+
+if (cmd.help) {
+    help();
     process.exit();
 }
 
-const cmdopts = minimist(process.argv.slice(2));
-
-let connConfigPath = cmdopts.C || cmdopts.connection || cmdopts._[0];
+let connConfigPath = cmd.connection;
 if (!connConfigPath && fs.existsSync('ceph.json')) {
     connConfigPath = 'ceph.json';
 }
@@ -39,17 +51,18 @@ if (!fs.existsSync(connConfigPath)) {
     process.exit(1);
 }
 
-let config = null;
+let connConfig = null;
 try {
-    config = JSON.parse(fs.readFileSync(connConfigPath, 'utf8'));
+    connConfig = JSON.parse(fs.readFileSync(connConfigPath, 'utf8'));
 } catch (error) {
     console.error(`failed to load config in ${connConfigPath}`);
     process.exit(1);
 }
+if (cmd.container) connConfig.container = cmd.container;
 
 let conn;
 try {
-    conn = new ceph.createConnection(config);
+    conn = new ceph.createConnection(connConfig);
 } catch (error) {
     console.error(error);
     process.exit(1);
@@ -84,88 +97,95 @@ else {
     };
 }
 
-function main(port) {
-    let sandy = new Sandy();
-    http.createServer((req, res) => {
-        if (req.url == '/favicon.ico') {
-            res.statusCode = 404;
-            res.end();
-            sandy.log(req, res);
+let sandy;
+let listener = (req, res) => {
+    let endRes = (statusCode) => {
+        if (statusCode) {
+            res.statusCode = statusCode;
+            res.write(ERROR_PAGES[statusCode]);
+        }
+        res.end();
+        sandy.log(req, res);
+    };
+    
+    let onMetas = (err, metas) => {
+        if (err) {
+            console.log(err.toString());                    
+            return endRes(500);
         }
 
-        else if (req.url.endsWith('/')) {
-            conn.findObjects({
-                path: req.url.substr(1)
-            }, (err, metas) => {
-                if (err) {
-                    res.statusCode = 500;
-                    res.end();
-                    return;
-                }
-                
-                let items = [];
-                metas.forEach(meta => {
+        let items = [];
+        metas.forEach(meta => {
 
-                    // This is a directory item.
-                    if (meta.subdir) {
-                        items.push({
-                            href: '/' + meta.subdir,
-                            text: meta.subdir
-                        });
-                    }
-
-                    // This is a object(file) item.
-                    else {
-                        items.push({
-                            href: '/' + meta.name,
-                            text: meta.name
-                        })
-                    }
+            // This is a directory item.
+            if (meta.subdir) {
+                items.push({
+                    href: '/' + meta.subdir,
+                    text: meta.subdir,
+                    target: '_self',
                 });
+            }
 
-                let dirs = [];
-                if (1) {
-                    let dirnames = req.url.split('/').slice(1, -1);
-                    let href = '/';
-                    dirs.push({ text: 'ROOT', href });
-                    dirnames.forEach((text, index) => {
-                        href += text + '/',
-                        dirs.push({ text, href });
-                    });
-                }
+            // This is a object(file) item.
+            else {
+                items.push({
+                    href: '/' + meta.name,
+                    text: meta.name,
+                    target: '_blank',
+                })
+            }
+        });
 
-                let data = { meta, item: items, dirs };
-                res.write(parser(data));
-                res.end();
-                sandy.log(req, res);
+        let dirs = [];
+        if (1) {
+            let dirnames = req.url.split('/').slice(1, -1);
+            let href = '/';
+            dirs.push({ text: 'ROOT', href });
+            dirnames.forEach((text, index) => {
+                href += text + '/',
+                dirs.push({ text, href });
             });
         }
 
-        else {
-            let name = req.url.substr(1);
-            conn.pullObject(name)
-                .on('meta', (meta) => {
-                    res.setHeader('content-type', meta.contentType);
-                })
-                .on('error', (err) => {
-                    res.statusCode = 404;
-                    res.write(ERROR_PAGES['404']);
-                    res.end();
-                })
-                .pipe(res);
-        }
+        let data = { meta, item: items, dirs };
+        res.write(parser(data));
+        endRes();
+    };
+    
 
-    })
-    .on('error', (err) => console.error(`Server error: ${err.message}`))
-    .on('listening', () => console.log(`Ceph Agent started at port ${port}`))
-    .listen(port)
-    ;
+    if (req.url == '/favicon.ico') {
+        endRes(404);
+    }
+    else if (req.url.endsWith('/')) {
+        conn.findObjects({
+            path: req.url.substr(1)
+        }, onMetas);
+    }
+    else {
+        let name = req.url.substr(1);
+        conn.pullObject(name)
+            .on('meta', (meta) => {
+                res.setHeader('content-type', meta.contentType);
+            })
+            .on('error', (err) => {
+                endRes(404);
+            })
+            .pipe(res);
+    }
+};
+
+function main(port) {
+    sandy = new Sandy();
+    http.createServer(listener)
+        .on('error', (err) => console.error(`Server error: ${err.message}`))
+        .on('listening', () => console.log(`Ceph Agent started at port ${port}`))
+        .listen(port)
+        ;
     
 }
 
-let port = cmdopts.port || cmdopts.p;
-if (port) {
-    main(port);
+if (cmd.port) {
+    main(cmd.port);
 }
 else {
     portman.seekUsable('>=7000', (err, port) => main(port));
