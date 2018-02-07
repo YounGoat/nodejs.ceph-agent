@@ -7,15 +7,13 @@ __Simple UI for CEPH storage__
 
 Languages / [简体中文](./README.zh_CN.md)
 
+![logo](./docs/logo.128.png)
+
 ##	Table of contents
 
 *	[Get Started](#get-started)
 * 	[Manual](#manual)
 *	[API](#api)
-*	[Why ceph-agent](#why-ceph-agent)
-*	[Honorable Dependents](#honorable-dependents)
-*	[About](#about)
-*	[References](#references)
 *   [Recommendations](#recommendations)
 
 ##	Links
@@ -37,9 +35,15 @@ Firstly, create a JSON file and put into your CEPH storage connection configurat
 }
 ```
 
+ATTENTION: All above options but *container* are necessary.
+
 Then, run `ceph-agent` passing path of the JSON file.
 
 ```bash
+# Install globally.
+npm install -g ceph-agent
+
+# Start agent (an HTTP proxy to CEPH storage service).
 ceph-agent swift.json
 ```
 
@@ -66,15 +70,10 @@ ceph-agent -C | --connection <path/to/connection-config.json>
 
 No API available now.
 
-##  Why *ceph-agent*
-
-##  Honorable Dependents
-
-##  About
-
-##  References
-
 ##  Recommendations
 
 *   [ceph](https://www.npmjs.com/package/ceph)
+*   [ceph-agent](https://www.npmjs.com/package/ceph-agent)
+*   [ceph-cli](https://www.npmjs.com/package/ceph-cli)
+*   [ceph-sync](https://www.npmjs.com/package/ceph-sync)
 *   [osapi](https://www.npmjs.com/package/osapi)

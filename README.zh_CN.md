@@ -49,4 +49,7 @@ ceph-agent -C | --connection <path/to/connection-config.json>
 ##  推荐
 
 *   [ceph](https://www.npmjs.com/package/ceph)
+*   [ceph-agent](https://www.npmjs.com/package/ceph-agent)
+*   [ceph-cli](https://www.npmjs.com/package/ceph-cli)
+*   [ceph-sync](https://www.npmjs.com/package/ceph-sync)
 *   [osapi](https://www.npmjs.com/package/osapi)

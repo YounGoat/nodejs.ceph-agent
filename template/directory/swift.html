@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ceph/Swift Agent</title>
+    <link rel="stylesheet" href="${config:@public-location}css/index.css" />
+</head>
+<body>
+    <h1>${config:@application-name}<sub>version ${config:@version}</sub></h1>
+    <ul>
+        <li><label>EndPoint</label> ${meta:@endPoint}</li>
+        <li><label>Username</label> ${meta:@username}</li>
+        <li><label>Container</label> ${meta:@container}</li>
+    </ul>
+
+    <hr/>
+    Location ${locations: &gt; <a href="@href">@text</a>}
+
+    <ul>
+        ${dirs: <li> [+] <a href="@href" target="_self">@text</a></li>}
+        ${files: <li class="object"> <span class="datetime">@lastModified</span> [=] <a href="@href" target="_blank">@text</a></li>}
+    </ul>
+
+    <hr/>
+    Legends:
+    <ul>
+        <li>+ means directory</li>
+        <li>= means file (object)</li>
+    </ul>
+</body>
+</html>

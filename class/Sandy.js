@@ -9,7 +9,6 @@ const MODULE_REQUIRE = 1
     ;
 
 function Sandy() {
-    
 }
 
 Sandy.prototype.log = function(request, response) {
