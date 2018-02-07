@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning 2.0.0](http://semver.org/).
 
+##	[0.1.0] - Feb 8th, 2018
+
+This is a more mature version than ever:
+*	UI optimized.
+*	Containers / Buckets list available.
+
 ##	[0.0.3] - Jan 10, 2018
 
 *	Dependencies upgraded.

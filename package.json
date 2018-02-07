@@ -5,6 +5,7 @@
     "dependencies": {
         "ceph": "^0.3.0",
         "commandos": "^0.1.4",
+        "font-awesome": "^4.7.0",
         "noda": "^0.1.2",
         "portman": "^0.0.3"
     },
@@ -14,7 +15,7 @@
     "directories": {},
     "scripts": {},
     "name": "ceph-agent",
-    "version": "0.0.4",
+    "version": "0.2.0",
     "main": "index.js",
     "keywords": [
         "ceph",
@@ -31,5 +32,9 @@
         "name": "YounGoat",
         "email": "youngoat@163.com",
         "url": "https://youngoat.github.io"
+    },
+    "config": {
+        "application-name": "Ceph Object Storage Explorer",
+        "public-location": "/ceph-agent-public-resources-2018/"
     }
 }
