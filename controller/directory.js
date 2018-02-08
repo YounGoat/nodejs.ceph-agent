@@ -35,8 +35,6 @@ const MODULE_REQUIRE = 1
 	;
 
 module.exports = function(req, res, agent, callback) {
-    console.log('...');
-
     let options = {}, base = null, container = null;
     if (agent.conn.get('container')) {
         container = agent.conn.get('container');

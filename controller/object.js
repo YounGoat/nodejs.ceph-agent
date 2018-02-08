@@ -28,10 +28,8 @@ module.exports = function(req, res, agent, callback) {
         options.name = decodeURIComponent(req.url.substr(posOfSecondSlash + 1));
     }
 
-	console.log(options.name);
 	agent.conn.pullObject(options)
 		.on('meta', meta => {
-			console.log(meta);
 			res.setHeader('content-type', meta.contentType);
 		})
 		.on('error', err => {

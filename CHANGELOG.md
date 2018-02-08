@@ -2,6 +2,10 @@
 
 Notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning 2.0.0](http://semver.org/).
 
+##	[0.1.1] - Feb 8th, 2018
+
+*	Remove debug code wrongly published with version 0.1.0 .
+
 ##	[0.1.0] - Feb 8th, 2018
 
 This is a more mature version than ever:
