@@ -4,8 +4,10 @@ const MODULE_REQUIRE = 1
 	/* built-in */
 	
 	/* NPM */
+	, noda = require('noda')
 	
 	/* in-package */
+	, kmg = noda.inRequire('lib/kmg')
 	;
 
 module.exports = function(req, res, agent, callback) {
@@ -19,6 +21,8 @@ module.exports = function(req, res, agent, callback) {
             return {
                 href: '/' + meta.name + '/',
 				text: meta.name,
+				count: meta.count,
+				size: kmg(meta.bytes, 'mega') + 'MB',
             };
         })
 

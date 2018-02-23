@@ -65,7 +65,8 @@ if (1) {
     agent = new Agent(connConfig);
 }
 
-function main(port) {
+function main() {
+    let port = cmd.port;
     let callback = (err) => {
         if (err) {
             console.error(`Server error: ${err.message}`);
@@ -75,8 +76,8 @@ function main(port) {
         }
     };
 
-    if (cmd.port) {
-        agent.start(cmd.port);
+    if (port) {
+        agent.start(port, callback);
     }
     else {
         portman.seekUsable('>=7000', (err, usablePort) => {
@@ -92,4 +93,3 @@ function main(port) {
 }
 
 main();
-
