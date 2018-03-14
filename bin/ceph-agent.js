@@ -72,7 +72,8 @@ function main() {
             console.error(`Server error: ${err.message}`);
         }
         else {
-            console.log(`Ceph Agent started at port ${port}`);
+            console.log(`Ceph Agent started at port ${port}.`);
+            console.log(`Try http://localhost:${port} in web browser.`);
         }
     };
 

@@ -5,19 +5,20 @@ __Simple UI for CEPH storage__
 [![ceph-agent's License](https://img.shields.io/npm/l/ceph-agent.svg)](https://www.npmjs.com/package/ceph-agent)
 [![latest version of ceph-agent](https://img.shields.io/npm/v/ceph-agent.svg)](https://www.npmjs.com/package/ceph-agent)
 
-Languages / [简体中文](./README.zh_CN.md)
+> Languages / [简体中文](./README.zh_CN.md)
+
+##  Description
+
+Start a web server as an agent of remote CEPH storage.
 
 ![logo](./docs/logo.128.png)
 
-##	Table of contents
+##	ToC
 
 *	[Get Started](#get-started)
 * 	[Manual](#manual)
 *	[API](#api)
 *   [Recommendations](#recommendations)
-
-##	Links
-
 *	[CHANGE LOG](./CHANGELOG.md)
 *	[Homepage](https://github.com/YounGoat/nodejs.ceph-agent)
 

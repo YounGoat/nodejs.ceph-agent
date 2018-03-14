@@ -19,7 +19,8 @@ module.exports = function(req, res, agent, callback) {
 
         let items = metas.map(meta => {
             return {
-                href: '/' + meta.name + '/',
+				metaHref: `/${meta.name}?meta`,
+                href: `/${meta.name}/`,
 				text: meta.name,
 				count: meta.count,
 				size: kmg(meta.bytes, 'mega') + 'MB',

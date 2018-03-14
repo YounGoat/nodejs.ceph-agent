@@ -13,21 +13,19 @@
         <li><label>EndPoint</label> ${meta:@endPoint}</li>
         <li><label>Username</label> ${meta:@username}</li>
         <li><label>Container</label> ${meta:@container}</li>
+        <li><label>Name</label> ${meta:@name} <a href="/${meta:@container}/${meta:@name}" class="tag">download</a></li>
     </ul>
 
     <hr/>
-    Location ${locations: &gt; <a href="@href">@text</a>}
 
+    <h2>Basic Info</h2>
     <ul>
-        ${dirs: <li> [+] <a href="@href" target="_self">@text</a></li>}
-        ${files: <li class="object"> <span class="datetime">@lastModified</span>[=] <a href="@downloadHref" class="tag" target="_blank">download</a> <a href="@metaHref">@text</a></li>}
+        ${objectInfo: <li><label>@name</label> @value</li>}
     </ul>
 
-    <hr/>
-    Legends:
+    <h2>User Defined Meta Info</h2>
     <ul>
-        <li>+ means directory</li>
-        <li>= means file (object)</li>
+        ${objectMeta: <li><label>@name</label> @value</li>}
     </ul>
 </body>
 </html>

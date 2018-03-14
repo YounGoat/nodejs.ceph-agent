@@ -9,6 +9,9 @@ h2.status-code { color: red; font-family: 'Times New Roman', tahoma; font-size: 
 a { text-decoration: none; }
 a:hover { font-style:italic; color: red; }
 
+.tag { font-family: tahoma; font-size: 9pt; padding: 1px 2px; border-radius: 3px; background-color: green; color: white; }
+.tag:hover { font-style: normal; color: white; background-color: red; }
+
 li.object > .datetime, li.container > .stat { float: right; color: gray; }
 li.object:hover > .datetime, li.container:hover > .stat { color: black; }
 
@@ -16,6 +19,6 @@ li.container .objects, li.container .size { display: inline-block; text-align: r
 li.container .objects { width: 10em; }
 li.container .size { width: 6em; }
 
-li > label { display: block; float: left; width: 120px; color: gray; font-style: italic; }
+li > label { display: block; float: left; min-width: 130px; margin-right: 10px; color: gray; font-style: italic; }
 
 hr { border: none; height: 1px; background: silver; }

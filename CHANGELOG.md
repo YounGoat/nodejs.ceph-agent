@@ -2,6 +2,13 @@
 
 Notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning 2.0.0](http://semver.org/).
 
+##  [0.3.0] - Mar 14th, 2018, RISKY
+
+*   On exploring directory, tailing asterisk is accepted to filter items with prefixed name. E.g.
+    http://localhost:7000/foo/bar/q*  
+    And then, when access an object whose name really tailed with asterisk, use query name as replacement:  
+    http://localhost:7000/?name=foo/bar/q*
+
 ##	[0.2.0] - Feb 23th, 2018
 
 *	Fixed the bug that option `-C` not recognized.

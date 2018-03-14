@@ -27,6 +27,7 @@ class Agent {
 		this.parser = {};
 	}
 
+	// This method may be invoked in controller/*.js .
 	render(name, data) {
 		if (!this.parser[name]) {
 			let template = noda.inRead(`template/${name}.html`, 'utf8');
@@ -69,7 +70,7 @@ class Agent {
 			}
 
 			// 目录。
-			else if (req.pathname.endsWith('/') && !req.query.name) {
+			else if ((req.pathname.endsWith('/') || req.pathname.endsWith('*')) && !req.query.name) {
 				run('directory');
 			}
 

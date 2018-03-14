@@ -1,1 +1,0 @@
-'API is not available now.'

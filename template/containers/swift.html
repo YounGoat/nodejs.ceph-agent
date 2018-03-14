@@ -18,7 +18,14 @@
     Containers:
 
     <ul>
-        ${item: <li class="container"><div class="stat"><span class="objects">@count F</span> <span class="size">@size</span></div><a href="@href">@text</a></li>}
+        ${item: <li class="container"><div class="stat"><span class="objects">@count O/F</span> <span class="size">@size</span></div><a href="@metaHref" class="tag">meta</a> <a href="@href">@text</a></li>}
+    </ul>
+
+    <hr/>
+    Legends:
+    <ul>
+        <li>O/F = Object / File</li>
+        <li>MB = MegaBytes</li>
     </ul>
 
 </body>

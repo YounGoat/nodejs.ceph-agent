@@ -5,8 +5,10 @@ const MODULE_REQUIRE = 1
 	
 	/* NPM */
     , modifyUrl = require('jinang/modifyUrl')
+    , noda = require('noda')
 	
     /* in-package */
+    , breadcrumbs = noda.inRequire('lib/breadcrumbs')
     
     /* in-file */
     , encodeName = name => name.split('/').map(encodeURIComponent).join('/')
@@ -36,19 +38,29 @@ const MODULE_REQUIRE = 1
 
 module.exports = function(req, res, agent, callback) {
     let options = {}, base = null, container = null;
+    let pathname = req.pathname;
     if (agent.conn.get('container')) {
         container = agent.conn.get('container');
         options.container = container;
-        options.path = req.pathname.substr(1);
+        pathname = pathname.substr(1);
         base = '/';
     }
     else {
-        let pos = req.url.indexOf('/', 1);
-        container = req.url.substring(1, pos);
+        let pos = pathname.indexOf('/', 1);
+        container = pathname.substring(1, pos);
         options.container = container;
-        options.path = req.pathname.substr(pos + 1);
+        pathname = pathname.substr(pos + 1);
         base = `/${options.container}/`;
     }
+
+    if (pathname.endsWith('*')) {
+        options.prefix = pathname.slice(0, -1);
+        options.delimiter = '/';
+    }
+    else {
+        options.path = pathname;
+        options.delimiter = '';
+    }    
 
     let finders = [];
     
@@ -78,12 +90,11 @@ module.exports = function(req, res, agent, callback) {
     }
 
     // options.marker = '200.log';
-    options.delimiter = '';
     finders.push(agent.conn.findObjects(options));
 
     Promise.all(finders).then(metaGroups => {
         let dirs = [], files = [];
-        let concatHref = path => `//${req.headers.host}${base}${path}`;
+        let concatHref = pathname => `//${req.headers.host}${base}${pathname}`;
         
         metaGroups.forEach(metas => {
             metas.forEach(meta => {
@@ -98,16 +109,24 @@ module.exports = function(req, res, agent, callback) {
                 // This is a object(file) item.
                 else {
                     let name = encodeName(meta.name);
-                    let href = concatHref(name.endsWith('/') ? `?name=${name}` : name);
+                    let isSpecialName = name.endsWith('/') || name.endsWith('*');
+                    let downloadHref = concatHref(isSpecialName ? `?name=${name}` : name);
+                    let metaHref = concatHref(isSpecialName ? `?name=${name}&meta` : `${name}?meta`);
                     let text = /^\s+$/.test(meta.name) ? '[WHITESPACES]' : meta.name;
                     files.push({
-                        href,
+                        downloadHref,
+                        metaHref,
                         text,
                         lastModified: formatDate(meta.last_modified),
                     })
                 }
             });
         });
+
+        if (dirs.length + files.length == 0) {
+            callback(new Error('no objects found'), 404);
+            return;
+        }
 
         let meta, conn = agent.conn;
         if (conn.get('style') == 'swift') {
@@ -124,22 +143,14 @@ module.exports = function(req, res, agent, callback) {
             };
         }
 
-        let locations = [];
-        if (1) {
-            let dirnames = req.url.split('/').slice(1, -1);
-            let href = `//${req.headers.host}/`;
-            locations.push({ text: 'ROOT', href });
-            dirnames.forEach((text, index) => {
-                href += text + '/';
-                if (text === '') text = '/';
-                locations.push({ text, href });
-            });
-        }
-
+        let locations = breadcrumbs(req.pathname, true);
         let data = { meta, dirs, files, locations };
         let html = agent.render(`directory/${agent.conn.get('style')}`, data);
         res.write(html);
         callback();
 
-    }).catch(err => callback(err, 500));
+    }).catch(err => {
+        console.log(err);
+        callback(err, 500)
+    });
 };

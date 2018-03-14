@@ -15,8 +15,8 @@
     "directories": {},
     "scripts": {},
     "name": "ceph-agent",
-    "version": "0.2.0",
-    "main": "index.js",
+    "version": "0.3.0",
+    "main": "class/Agent",
     "keywords": [
         "ceph",
         "http-proxy",
