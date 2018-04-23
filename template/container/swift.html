@@ -12,20 +12,18 @@
     <ul>
         <li><label>EndPoint</label> ${meta:@endPoint}</li>
         <li><label>Username</label> ${meta:@username}</li>
-        <li><label>Container</label> ${meta:@container}</li>
-        <li><label>Name</label> ${meta:@name} <a href="/${meta:@container}/${meta:@name}" class="tag">download</a></li>
     </ul>
 
     <hr/>
 
     <h2>Basic Info</h2>
     <ul>
-        ${objectInfo: <li><label>@name</label> @value</li>}
+        ${containerInfo: <li><label>@name</label> @value</li>}
     </ul>
-
+    
     <h2>User Defined Meta Info</h2>
     <ul>
-        ${objectMeta: <li><label>@name</label> @value</li>}
+        ${containerMeta: <li><label>@name</label> @value</li>}
     </ul>
 </body>
 </html>

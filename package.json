@@ -3,10 +3,11 @@
         "ceph-agent": "bin/ceph-agent.js"
     },
     "dependencies": {
-        "ceph": "^0.4.2",
-        "commandos": "^0.1.6",
-        "jinang": "^0.9.0",
-        "noda": "^0.3.0",
+        "ceph": "^0.7.0",
+        "commandos": "^0.3.1",
+        "if2": "^0.2.0",
+        "jinang": "^0.21.0",
+        "noda": "^0.4.0",
         "portman": "^0.0.3"
     },
     "devDependencies": {
@@ -15,7 +16,7 @@
     "directories": {},
     "scripts": {},
     "name": "ceph-agent",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "main": "class/Agent",
     "keywords": [
         "ceph",

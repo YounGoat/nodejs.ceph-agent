@@ -68,7 +68,7 @@ module.exports = function(req, res, agent, callback) {
 					};
 				}
 
-				let html = agent.render('object', { locations, meta, objectInfo, objectMeta } );
+				let html = agent.render(`object/${agent.conn.get('style')}`, { locations, meta, objectInfo, objectMeta } );
 				res.write(html);
 				callback();
 			}

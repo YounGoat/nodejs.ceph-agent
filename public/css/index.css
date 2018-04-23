@@ -1,9 +1,10 @@
 * { font-family: 'American Typewriter', 'Yuanti SC', tahoma; }
 li, li * { font-family: monospace, tahoma; }
 
-h1 { font-weight: 200; background: #66aadd; margin: 0; padding: .5em 1em; color: white; }
+h1 { font-weight: 200; background: #66aadd; margin: 0; padding: .5em 20pt; color: white; }
 h1 sub { display: block; margin-top: .5em; font-size: 60%; }
 
+h2 { font-weight: 100; margin: 0; padding: .5em 20pt; color: #66aadd; }
 h2.status-code { color: red; font-family: 'Times New Roman', tahoma; font-size: 800%; margin: 0; }
 
 a { text-decoration: none; }

@@ -9,7 +9,12 @@ Notable changes to this project will be documented in this file. This project ad
     And then, when access an object whose name really tailed with asterisk, use query name as replacement:  
     http://localhost:7000/?name=foo/bar/q*
 
-##	[0.2.0] - Feb 23th, 2018
+##  [0.3.0] - Apr 23rd, 2018
+
+*   Dependencies upgraded.
+*   *Container meta page* completed.
+
+##	[0.2.0] - Feb 23rd, 2018
 
 *	Fixed the bug that option `-C` not recognized.
 *	Display total object count for containers and byte size for object (file).

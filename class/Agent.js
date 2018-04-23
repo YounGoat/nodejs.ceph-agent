@@ -17,7 +17,7 @@ const MODULE_REQUIRE = 1
 
 class Agent {
 	constructor(connConfig) {
-		let conn = new ceph.createConnection(connConfig); 
+		let conn = new ceph.createConnection(connConfig);
 		
 		let pkg = noda.currentPackage();
 		this.config = pkg.config;
