@@ -69,7 +69,29 @@ ceph-agent -C | --connection <path/to/connection-config.json>
 
 ##  API
 
-No API available now.
+```javascript
+const CephAgent = require('ceph-agent');
+
+const conn = {
+    "endPoint"   : "http://storage.example.com/",
+    "subuser"    : "userName:subUserName",
+    "key"        : "380289ba59473a368c593c1f1de6efb0380289ba5",
+    "container"  : "containerName", /* OPTIONAL */
+};
+
+const agent = new CephAgent(conn, { basepath: '/myceph/' });
+
+// -----------------------------------------------------------------------------
+// -- CASE 1: Start HTTP server directly.
+agent.start();
+
+// -----------------------------------------------------------------------------
+// -- CASE 2: Return a listener.
+conset handler = agent.getHandler();
+
+// In express.
+app.use('/myceph/*', handler);
+```
 
 ##  Recommendations
 

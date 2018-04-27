@@ -9,12 +9,14 @@ const MODULE_REQUIRE = 1
 	, forInObject = require('jinang/forInObject')
 	
 	/* in-package */
+	, kmg = noda.inRequire('lib/kmg')
 	;
 
 module.exports = function(req, res, agent, callback) {
 	// 取元数据 OR 取内容。
 	if (Object.keys(req.query).includes('meta')) {
 		let container = req.pathname.slice(1);
+		let locations = agent.breadcrumbs(req.pathname, false);
 
 		let meta, containerInfo = [], containerMeta = [];
 		if (agent.conn.get('style') == 'swift') {
@@ -36,12 +38,15 @@ module.exports = function(req, res, agent, callback) {
 			else {
 				forInObject(data, (name, value) => {
 					if (name == 'meta') return;
+					if (['bytes-used', 'bytes-used-actual'].includes(name)) {
+						value = `${value} ( ${kmg(value)}B )`;
+					}
 					containerInfo.push({ name, value });
 				});
 				forInObject(data.meta, (name, value) => {
 					containerMeta.push({ name, value });
 				});
-				let html = agent.render(`container/${agent.conn.get('style')}`, { meta, containerInfo, containerMeta });
+				let html = agent.render(`container/${agent.conn.get('style')}`, { locations, meta, containerInfo, containerMeta });
 				res.write(html);
 				callback();				
 			}

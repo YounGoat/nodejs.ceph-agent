@@ -8,7 +8,6 @@ const MODULE_REQUIRE = 1
 	, noda = require('noda')
 	
 	/* in-package */
-	, breadcrumbs = noda.inRequire('lib/breadcrumbs')
 	;
 
 module.exports = function(req, res, agent, callback) { 
@@ -32,7 +31,7 @@ module.exports = function(req, res, agent, callback) {
 	}
 
 	let pesudoPathname = agent.conn.get('container') ? `/${options.name}` : `/${options.container}/${options.name}`;
-	let locations = breadcrumbs(pesudoPathname, false);
+	let locations = agent.breadcrumbs(pesudoPathname, false);
 	
 	// 取元数据 OR 取内容。
 	if (Object.keys(req.query).includes('meta')) {

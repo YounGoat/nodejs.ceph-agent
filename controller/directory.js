@@ -8,7 +8,6 @@ const MODULE_REQUIRE = 1
     , noda = require('noda')
 	
     /* in-package */
-    , breadcrumbs = noda.inRequire('lib/breadcrumbs')
     
     /* in-file */
     , encodeName = name => name.split('/').map(encodeURIComponent).join('/')
@@ -43,14 +42,14 @@ module.exports = function(req, res, agent, callback) {
         container = agent.conn.get('container');
         options.container = container;
         pathname = pathname.substr(1);
-        base = '/';
+        base = `${agent.basepath}/`;
     }
     else {
         let pos = pathname.indexOf('/', 1);
         container = pathname.substring(1, pos);
         options.container = container;
         pathname = pathname.substr(pos + 1);
-        base = `/${options.container}/`;
+        base = `${agent.basepath}/${options.container}/`;
     }
 
     if (pathname.endsWith('*')) {
@@ -89,7 +88,6 @@ module.exports = function(req, res, agent, callback) {
         finders.push(p);
     }
 
-    // options.marker = '200.log';
     finders.push(agent.conn.findObjects(options));
 
     Promise.all(finders).then(metaGroups => {
@@ -143,7 +141,7 @@ module.exports = function(req, res, agent, callback) {
             };
         }
 
-        let locations = breadcrumbs(req.pathname, true);
+        let locations = agent.breadcrumbs(req.pathname, true);
         let data = { meta, dirs, files, locations };
         let html = agent.render(`directory/${agent.conn.get('style')}`, data);
         res.write(html);

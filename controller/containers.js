@@ -15,15 +15,15 @@ module.exports = function(req, res, agent, callback) {
 		if (err) {
 			callback(err, 500);
 			return;
-        }
-
+		}
+		
         let items = metas.map(meta => {
             return {
-				metaHref: `/${meta.name}?meta`,
-                href: `/${meta.name}/`,
+				metaHref: `${agent.basepath}/${meta.name}?meta`,
+                href: `${agent.basepath}/${meta.name}/`,
 				text: meta.name,
 				count: meta.count,
-				size: kmg(meta.bytes, 'mega') + 'MB',
+				size: kmg(meta.bytes) + 'B',
             };
         })
 
