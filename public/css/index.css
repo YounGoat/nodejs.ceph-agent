@@ -23,3 +23,6 @@ li.container .size { width: 6em; }
 li > label { display: block; float: left; min-width: 130px; margin-right: 10px; color: gray; font-style: italic; }
 
 hr { border: none; height: 1px; background: silver; }
+
+li.meta .decoded { color: green; }
+li.meta .decoded small { color: gray; margin-right: 1em; }

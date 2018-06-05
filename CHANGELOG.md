@@ -2,17 +2,21 @@
 
 Notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning 2.0.0](http://semver.org/).
 
+##  [0.4.1] - June 5th, 2018
+
+*   Meta value auto-decoded via [mifo](https://www.npmjs.com/package/mifo).
+
+##  [0.4.0] - Apr 23rd, 2018
+
+*   Dependencies upgraded.
+*   *Container meta page* completed.
+
 ##  [0.3.0] - Mar 14th, 2018, RISKY
 
 *   On exploring directory, tailing asterisk is accepted to filter items with prefixed name. E.g.
     http://localhost:7000/foo/bar/q*  
     And then, when access an object whose name really tailed with asterisk, use query name as replacement:  
     http://localhost:7000/?name=foo/bar/q*
-
-##  [0.4.0] - Apr 23rd, 2018
-
-*   Dependencies upgraded.
-*   *Container meta page* completed.
 
 ##	[0.2.0] - Feb 23rd, 2018
 

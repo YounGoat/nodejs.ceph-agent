@@ -5,6 +5,7 @@ const MODULE_REQUIRE = 1
 	
 	/* NPM */
 	, if2 = require('if2')
+	, mifo = require('mifo')
 	, noda = require('noda')
 	
 	/* in-package */
@@ -48,7 +49,16 @@ module.exports = function(req, res, agent, callback) {
 				}
 				if (data.meta) {
 					for (let name in data.meta) {
-						objectMeta.push({ name, value: data.meta[name] });
+						let value = data.meta[name];
+						objectMeta.push({ name, value });
+						
+						let decoded = mifo.decode(value);
+						if (decoded) {
+							objectMeta.push({
+								name,
+								value: `<span class="decoded"><small>DECODED AS</small>${decoded}</span>`,
+							});
+						}						
 					}
 				}
 
