@@ -52,13 +52,15 @@ module.exports = function(req, res, agent, callback) {
 						let value = data.meta[name];
 						objectMeta.push({ name, value });
 						
+						// Since ceph@0.8.4, mifo encode/decode already integrated in creating/reading object.
+						// So next code snippet is redundant.
 						let decoded = mifo.decode(value);
 						if (decoded) {
 							objectMeta.push({
 								name,
 								value: `<span class="decoded"><small>DECODED AS</small>${decoded}</span>`,
 							});
-						}						
+						}
 					}
 				}
 

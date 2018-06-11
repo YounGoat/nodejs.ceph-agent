@@ -3,7 +3,7 @@
         "ceph-agent": "bin/ceph-agent.js"
     },
     "dependencies": {
-        "ceph": "^0.7.1",
+        "ceph": "^0.8.5",
         "commandos": "^0.3.1",
         "if2": "^0.2.0",
         "jinang": "^0.21.0",
@@ -17,7 +17,7 @@
     "directories": {},
     "scripts": {},
     "name": "ceph-agent",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "main": "class/Agent",
     "keywords": [
         "ceph",

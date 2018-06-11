@@ -2,6 +2,10 @@
 
 Notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning 2.0.0](http://semver.org/).
 
+##  [0.5.2] - June 11th, 2018
+
+*   Upgrade dependency [ceph](https://www.npmjs.com/package/ceph).
+
 ##  [0.5.1] - June 5th, 2018
 
 *   Meta value auto-decoded via [mifo](https://www.npmjs.com/package/mifo).
