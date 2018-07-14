@@ -58,7 +58,7 @@ module.exports = function(req, res, agent, callback) {
     }
     else {
         options.path = pathname;
-        options.delimiter = '';
+        delete options.delimiter;
     }    
 
     let finders = [];

@@ -2,6 +2,10 @@
 
 Notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning 2.0.0](http://semver.org/).
 
+##  [0.5.3] - July 14th, 2018
+
+*   Fixed the bug on non-ASCII characters being present in object names (directory name).
+
 ##  [0.5.2] - June 11th, 2018
 
 *   Upgrade dependency [ceph](https://www.npmjs.com/package/ceph).

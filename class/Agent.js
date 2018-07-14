@@ -48,7 +48,7 @@ class Agent {
 			let parsedUrl = url.parse(if2.defined(req.originalUrl, req.url));
 			let l = this.basepath.length;
 			let basepath = parsedUrl.pathname.slice(0, l);
-			let pathname = parsedUrl.pathname.slice(l);
+			let pathname = decodeURIComponent(parsedUrl.pathname.slice(l));
 
 			if (basepath != this.basepath && next) {
 				return next();
