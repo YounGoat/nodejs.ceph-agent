@@ -11,7 +11,7 @@ __Simple UI for CEPH storage__
 
 Start a web server as an agent of remote CEPH storage.
 
-![logo](./docs/logo.128.png)
+![logo](./resources/logo.128.png)
 
 ##	ToC
 
@@ -50,7 +50,7 @@ ceph-agent swift.json
 
 By default, an HTTP service listening on port 7000 will be started. You may access the CEPH storage via http://localhost:7000/.
 
-![ceph-agent homepage](./docs/homepage.png)
+![ceph-agent homepage](./resources/homepage.png)
 
 ##	Manual
 

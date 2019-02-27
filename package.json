@@ -17,7 +17,7 @@
     "directories": {},
     "scripts": {},
     "name": "ceph-agent",
-    "version": "0.5.3",
+    "version": "0.6.0",
     "main": "class/Agent",
     "keywords": [
         "ceph",

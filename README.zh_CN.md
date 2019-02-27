@@ -30,7 +30,7 @@ ceph-agent swift.json
 
 该命令将在本地 7000 端口启动一个 HTTP 服务作为访问 Ceph 存储内容的媒介。默认端口不可用时，将自动搜索更高端口。
 
-![ceph-agent homepage](./docs/homepage.png)
+![ceph-agent homepage](./resources/homepage.png)
 
 ##  帮助
 

@@ -11,6 +11,6 @@ const MODULE_REQUIRE = 1
 	;
 
 module.exports = function(req, res, agent, callback) {
-	res.write(noda.inRead('docs/logo.32.png'));
+	res.write(noda.inRead('resources/logo.32.png'));
 	callback();
 };
